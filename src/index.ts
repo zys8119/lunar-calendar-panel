@@ -1,3 +1,5 @@
+import {lunarCalendarPanel} from "../types";
+
 interface config {
     tg:tg[];
     dz:tg[];
@@ -675,7 +677,7 @@ export const calendar:calendar = {
     }
 };
 
-export default class CalendarData {
+export default class CalendarData implements lunarCalendarPanel{
     /**
      @公元前的算法：
      年干=8-N(N﹤8)或8-N+10(N≧8)，N=年号除以10的余数=年号个位数。

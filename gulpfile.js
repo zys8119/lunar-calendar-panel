@@ -11,7 +11,7 @@ gulp.task("default", function () {
         .pipe(babel({
             presets: ["@babel/preset-env"]
         }))
-        .pipe(umd())
+        // .pipe(umd())
         .pipe(uglify())
         .pipe(gulp.dest("dist"));
 });
