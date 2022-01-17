@@ -1,8 +1,8 @@
 {
   "name": "lunar-calendar-panel",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "农历面板、万年历、农历公历互转",
-  "keywords": ["calendar","lunar-calendar", "农历面板", "万年历", "农历公历互转","农历转公历", "公历转农历"],
+  "keywords": "calendar lunar-calendar 农历面板 万年历 农历公历互转 农历转公历 公历转农历",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
