@@ -5,12 +5,14 @@
     "noImplicitAny": true,
     "sourceMap": false,
     "types": [
-        "/types/index.d.ts"
+    ],
+    "lib": [
+        "ES2016",
+        "DOM"
     ]
   },
   "files": [
     "src/*.ts",
-    "types/*.ts",
   ],
   "exclude": [
     "node_modules"

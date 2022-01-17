@@ -1,42 +1,8 @@
-import {lunarCalendarPanel} from "../types";
-
-interface config {
-    tg:tg[];
-    dz:tg[];
-    month:month;
-    monthNb:number[];
-    dayNb:dayNb;
-    NumString:string;
-    MonString:string;
-    yearNumArr:yearNumArr;
-    max:number;
-}
-type yearNumArr = {
-    [key:number]:number
-}
-type dayNb = {
-    [key:number]:string
-}
-type month = {
-    [key:string]:string[]
-}
-type tg = {
-    name:string;
-    code:string;
-    sx?:string;
-}
+import {lunarCalendarPanel, config, calendarType, returnDateCalendar} from "../types/index";
 
 
-/**
- * @1900-2100区间内的公历、农历互转
- * @charset UTF-8
- * @公历转农历：calendar.solar2lunar(1987,11,01); //[you can ignore params of prefix 0]
- * @农历转公历：calendar.lunar2solar(1987,09,10); //[you can ignore params of prefix 0]
- */
-interface calendar {
-    [key:string]:any & ((...args:any[])=>any)
-}
-export const calendar:calendar = {
+
+export const calendar:calendarType = {
 
     /**
      * 农历1900-2100的润大小信息表
@@ -469,8 +435,7 @@ export const calendar:calendar = {
      * @return JSON object
      * @eg:console.log(calendar.solar2lunar(1987,11,01));
      */
-    // @ts-ignore
-    solar2lunar:function (y:any,m:any,d:any) { //参数区间1900.1.31~2100.12.31
+    solar2lunar:function (y:any,m:any,d:any):any { //参数区间1900.1.31~2100.12.31
         y = parseInt(y)
         m = parseInt(m)
         d = parseInt(d)
@@ -517,8 +482,7 @@ export const calendar:calendar = {
         }
         //农历年
         var year   = i;
-        // @ts-ignore
-        var leap   = this.leapMonth(i); //闰哪个月
+        var leap:number   = this.leapMonth(i); //闰哪个月
         var isLeap = false;
 
         //效验闰月
@@ -629,12 +593,11 @@ export const calendar:calendar = {
      * @return JSON object
      * @eg:console.log(calendar.lunar2solar(1987,9,10));
      */
-    lunar2solar:function(y:any,m:any,d:any,isLeapMonth:any) {   //参数区间1900.1.31~2100.12.1
+    lunar2solar:function(y:any,m:any,d:any,isLeapMonth:any):any {   //参数区间1900.1.31~2100.12.1
         y = parseInt(y)
         m = parseInt(m)
         d = parseInt(d)
-        // @ts-ignore
-        var isLeapMonth = !!isLeapMonth;
+        var isLeapMonth:any = !!isLeapMonth;
         var leapOffset  = 0;
         var leapMonth   = this.leapMonth(y);
         var leapDay     = this.leapDays(y);
@@ -762,7 +725,7 @@ export default class CalendarData implements lunarCalendarPanel{
      * @param dateYear 年份
      * @param dateMonth 月份
      */
-    returnDate(dateYear?:number,dateMonth?:number){
+    returnDate(dateYear?:number,dateMonth?:number):any{
         var initData = new Date();
         dateYear = dateYear || initData.getFullYear();
         dateMonth = dateMonth || initData.getMonth()+1;
@@ -865,11 +828,9 @@ export default class CalendarData implements lunarCalendarPanel{
 
         const year_tg = this.config.tg[this.getN(dateA, this.config.tg.length) - 1];
         const year_dz = this.config.dz[this.getN(dateA, this.config.dz.length) - 1];
-        // @ts-ignore
         const monthObj = this.config.month[Object.keys(this.config.month).find(e=>e.indexOf(year_tg.name) > -1)];
         const month = monthObj[dateB - 1];
         // console.log((dateA % 5 -  2) *2 -1 + 10, monthObj)
-        // @ts-ignore
         let yearNb = this.config.yearNumArr[([1,2].includes(dateB) ? (dateA - 1) : dateA)];
         let monthNb = this.config.monthNb[dateB - 1];
         let daySum = yearNb+monthNb + dateC;
